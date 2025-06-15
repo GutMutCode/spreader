@@ -16,8 +16,12 @@ defmodule SpreaderWeb.AuthController do
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
     case Accounts.get_or_create_user(auth) do
       {:ok, user} ->
+        token = SpreaderWeb.AuthToken.sign(user)
+
         conn
         |> put_session(:user_id, user.id)
+        |> put_session(:auth_token, token)
+        |> put_resp_cookie("auth_token", token, http_only: true, same_site: "Lax")
         |> configure_session(renew: true)
         |> put_flash(:info, "Signed in successfully")
         |> redirect(to: ~p"/")
