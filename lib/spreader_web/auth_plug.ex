@@ -8,6 +8,7 @@ defmodule SpreaderWeb.AuthPlug do
   """
 
   import Plug.Conn
+  @behaviour Plug
   alias Spreader.Repo
   alias Spreader.Accounts.User
   alias SpreaderWeb.AuthToken
