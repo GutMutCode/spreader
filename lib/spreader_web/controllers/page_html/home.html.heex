@@ -37,6 +37,19 @@
               </svg>
               <span>Sign in with Google</span>
             </a>
+
+            <%= if @current_user do %>
+              <div class="mt-4 text-center text-sm text-green-700">
+                Logged in as <%= @current_user.email %>
+              </div>
+              <a href="/auth/logout" class="inline-block mt-2 rounded bg-red-600 px-4 py-1.5 text-sm font-semibold text-white hover:bg-red-700">
+                Log out
+              </a>
+            <% else %>
+              <div class="mt-4 text-center text-sm text-zinc-600">
+                Not logged in
+              </div>
+            <% end %>
           </div>
         </div>
       </div>

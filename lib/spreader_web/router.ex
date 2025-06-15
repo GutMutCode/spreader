@@ -5,6 +5,7 @@ defmodule SpreaderWeb.Router do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_live_flash
+    plug SpreaderWeb.AuthPlug
     plug Ueberauth
     plug :put_root_layout, html: {SpreaderWeb.Layouts, :root}
     plug :protect_from_forgery
@@ -24,6 +25,7 @@ defmodule SpreaderWeb.Router do
   scope "/auth", SpreaderWeb do
     pipe_through :browser
 
+    get "/logout", AuthController, :logout
     get "/:provider", AuthController, :request
     get "/:provider/callback", AuthController, :callback
   end

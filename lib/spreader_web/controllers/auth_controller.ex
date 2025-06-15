@@ -33,6 +33,15 @@ defmodule SpreaderWeb.AuthController do
     end
   end
 
+  # Logout
+  def logout(conn, _params) do
+    conn
+    |> configure_session(drop: true)
+    |> delete_resp_cookie("auth_token")
+    |> put_flash(:info, "Logged out")
+    |> redirect(to: ~p"/")
+  end
+
   # Failure callback
   def callback(%{assigns: %{ueberauth_failure: _fails}} = conn, _params) do
     conn
