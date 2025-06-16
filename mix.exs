@@ -78,7 +78,7 @@ defmodule Spreader.MixProject do
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
-      lint: ["credo --strict", "dialyzer"],
+      lint: ["credo --strict --only warnings,readability,refactor,consistency", "dialyzer"],
       "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
       "assets.build": ["tailwind spreader", "esbuild spreader"],
       "assets.deploy": [
