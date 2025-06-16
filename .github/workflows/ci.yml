@@ -1,0 +1,63 @@
+# Continuous Integration workflow for Spreader (Elixir/Phoenix)
+# Runs on every push & PR and executes mix test in an isolated environment.
+
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      db:
+        image: postgres:15
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: spreader_test
+        ports: ["5432:5432"]
+        # Give Postgres a bit of time to start up
+        options: >-
+          --health-cmd "pg_isready -U postgres" \
+          --health-interval 10s \
+          --health-timeout 5s \
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Elixir & Erlang/OTP
+        uses: erlef/setup-beam@v1
+        with:
+          otp-version: '26.2'
+          elixir-version: '1.16.2'
+
+      - name: Cache deps
+        uses: actions/cache@v3
+        with:
+          path: |
+            deps
+            _build
+          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-
+
+      - name: Install deps
+        run: mix deps.get
+
+      - name: Prepare database
+        env:
+          MIX_ENV: test
+          DATABASE_URL: ecto://postgres:postgres@localhost/spreader_test
+        run: mix ecto.create --quiet
+
+      - name: Run tests
+        env:
+          MIX_ENV: test
+          DATABASE_URL: ecto://postgres:postgres@localhost/spreader_test
+          SECRET_KEY_BASE: dummy_secret_key_base_for_ci
+        run: mix test --color
