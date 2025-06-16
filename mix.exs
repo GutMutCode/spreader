@@ -59,7 +59,10 @@ defmodule Spreader.MixProject do
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.5"},
       {:ueberauth, "~> 0.10"},
-      {:ueberauth_google, "~> 0.11"}
+      {:ueberauth_google, "~> 0.11"},
+      # Static analysis
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
+      {:dialyxir, "~> 1.4", only: [:dev], runtime: false}
     ]
   end
 
@@ -75,6 +78,7 @@ defmodule Spreader.MixProject do
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
+      lint: ["credo --strict", "dialyzer"],
       "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
       "assets.build": ["tailwind spreader", "esbuild spreader"],
       "assets.deploy": [

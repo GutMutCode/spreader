@@ -61,3 +61,28 @@ jobs:
           DATABASE_URL: ecto://postgres:postgres@localhost/spreader_test
           SECRET_KEY_BASE: dummy_secret_key_base_for_ci
         run: mix test --color
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Elixir & Erlang/OTP
+        uses: erlef/setup-beam@v1
+        with:
+          otp-version: '26.2'
+          elixir-version: '1.16.2'
+      - name: Cache deps
+        uses: actions/cache@v3
+        with:
+          path: |
+            deps
+            _build
+          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-
+      - name: Install deps
+        run: mix deps.get
+      - name: Run Credo & Dialyzer
+        env:
+          MIX_ENV: dev
+        run: mix lint
