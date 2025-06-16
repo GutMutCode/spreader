@@ -3,8 +3,8 @@ defmodule Spreader.Accounts do
   Accounts context responsible for managing user records.
   """
 
-  alias Spreader.Repo
   alias Spreader.Accounts.User
+  alias Spreader.Repo
 
   @spec get_or_create_user(Ueberauth.Auth.t()) :: {:ok, User.t()} | {:error, term()}
   def get_or_create_user(%Ueberauth.Auth{} = auth) do

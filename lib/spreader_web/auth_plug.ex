@@ -9,8 +9,8 @@ defmodule SpreaderWeb.AuthPlug do
 
   import Plug.Conn
   @behaviour Plug
-  alias Spreader.Repo
   alias Spreader.Accounts.User
+  alias Spreader.Repo
   alias SpreaderWeb.AuthToken
 
   @impl Plug
@@ -31,9 +31,8 @@ defmodule SpreaderWeb.AuthPlug do
   end
 
   defp verify_token(conn, token) do
-    with {:ok, %{"user_id" => id}} <- AuthToken.verify(token) do
-      load_user(conn, id)
-    else
+    case AuthToken.verify(token) do
+      {:ok, %{"user_id" => id}} -> load_user(conn, id)
       _ -> assign(conn, :current_user, nil)
     end
   end

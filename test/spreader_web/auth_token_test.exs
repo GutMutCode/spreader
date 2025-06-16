@@ -1,8 +1,8 @@
 defmodule SpreaderWeb.AuthTokenTest do
   use ExUnit.Case, async: true
 
-  alias SpreaderWeb.AuthToken
   alias Spreader.Accounts.User
+  alias SpreaderWeb.AuthToken
 
   describe "sign/1 & verify/1" do
     test "round-trip returns user_id" do
