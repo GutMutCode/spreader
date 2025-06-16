@@ -1,0 +1,14 @@
+msgid ""
+msgstr ""
+"Language: ko\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: lib/spreader_web/templates/terms_html/ko.html.heex:2
+msgid "Terms of Service"
+msgstr "서비스 이용약관"
+
+#: lib/spreader_web/templates/terms_html/ko.html.heex:20
+msgid "Last updated"
+msgstr "최종 수정"

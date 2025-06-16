@@ -7,6 +7,7 @@ defmodule SpreaderWeb.Router do
     plug :fetch_live_flash
     plug SpreaderWeb.AuthPlug
     plug Ueberauth
+    plug SpreaderWeb.LocalePlug
     plug :put_root_layout, html: {SpreaderWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
@@ -37,6 +38,11 @@ defmodule SpreaderWeb.Router do
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:spreader, :dev_routes) do
+    # gmc test route (internal)
+    scope "/", SpreaderWeb do
+      pipe_through :browser
+      get "/gmc/terms/:locale", TermsController, :show
+    end
     # If you want to use the LiveDashboard in production, you should put
     # it behind authentication and allow only admins to access it.
     # If your application does not have an admins-only section yet,
