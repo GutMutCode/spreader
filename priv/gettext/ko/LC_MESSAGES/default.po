@@ -12,3 +12,6 @@ msgstr "서비스 이용약관"
 #: lib/spreader_web/templates/terms_html/ko.html.heex:20
 msgid "Last updated"
 msgstr "최종 수정"
+
+msgid "Privacy Policy"
+msgstr "개인정보 처리방침"

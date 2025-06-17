@@ -1,0 +1,722 @@
+{
+  "metadata": {
+    "version": "3.0.0",
+    "schemaVersion": "2024.2",
+    "releaseDate": "2025-01-26",
+    "effectiveDate": "2025-02-01",
+    "language": "ko",
+    "revisionHistory": [
+      {
+        "version": "3.0.0",
+        "date": "2025-01-26",
+        "changes": "소셜 미디어 플랫폼 통합 및 개인정보 보호 설명 강화"
+      },
+      {
+        "version": "2.0.0",
+        "date": "2025-01-20",
+        "changes": "콘텐츠 재구성 및 개인정보 보호 설명 강화"
+      },
+      {
+        "version": "1.0.0",
+        "date": "2025-01-13",
+        "changes": "최초 출시"
+      }
+    ],
+    "availableLanguages": [
+      "en",
+      "ko"
+    ],
+    "accessibility": {
+      "role": "document",
+      "lang": "ko-KR",
+      "ariaLabel": "개인정보 처리방침",
+      "structure": {
+        "landmarks": true,
+        "headings": true
+      }
+    },
+    "formatting": {
+      "supported": [
+        "text",
+        "list",
+        "link",
+        "heading"
+      ],
+      "schema": "https://schema.org/PrivacyPolicy"
+    }
+  },
+  "document": {
+    "index": {
+      "type": "navigation",
+      "title": "목차",
+      "subtitle": "주요 섹션",
+      "items": [
+        {
+          "id": "section-1",
+          "title": "개인정보 수집 및 이용",
+          "ref": "#section-1"
+        },
+        {
+          "id": "section-2",
+          "title": "개인정보의 처리 목적",
+          "ref": "#section-2"
+        },
+        {
+          "id": "section-3",
+          "title": "개인정보의 제3자 제공",
+          "ref": "#section-3"
+        },
+        {
+          "id": "section-4",
+          "title": "개인정보의 보유 및 파기",
+          "ref": "#section-4"
+        },
+        {
+          "id": "section-5",
+          "title": "정보주체의 권리 및 행사 방법",
+          "ref": "#section-5"
+        },
+        {
+          "id": "section-6",
+          "title": "기술적·관리적 보호조치",
+          "ref": "#section-6"
+        },
+        {
+          "id": "section-7",
+          "title": "개인정보 보호책임자 및 연락처",
+          "ref": "#section-7"
+        },
+        {
+          "id": "section-8",
+          "title": "개인정보 처리방침 변경",
+          "ref": "#section-8"
+        },
+        {
+          "id": "section-9",
+          "title": "소셜 미디어 플랫폼 통합",
+          "ref": "#section-9"
+        }
+      ]
+    },
+    "introduction": {
+      "type": "section",
+      "content": [
+        {
+          "type": "text",
+          "value": "ingrey(이하 '회사')는 이용자의 개인정보를 중요시하며, 「개인정보 보호법」, 「정보통신망 이용촉진 및 정보보호 등에 관한 법률」 등 관련 법령을 준수하기 위하여 노력하고 있습니다."
+        },
+        {
+          "type": "text",
+          "value": "회사는 개인정보처리방침을 통하여 회사가 이용자로부터 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 파기, 제3자 제공 등에 관한 사항을 이용자에게 안내하고 있습니다."
+        }
+      ]
+    },
+    "definitions": {
+      "type": "section",
+      "title": "정의 및 범위",
+      "content": [
+        {
+          "type": "chapter",
+          "title": "정의",
+          "content": {
+            "type": "list",
+            "items": [
+              {
+                "text": "서비스: 회사가 제공하는 ingrey 애플리케이션, 웹사이트 및 관련 서비스."
+              },
+              {
+                "text": "이용자: 서비스에 접근하거나 이용하는 모든 개인."
+              },
+              {
+                "text": "개인정보: 식별된 또는 식별 가능한 자연인에 관한 모든 정보."
+              },
+              {
+                "text": "소셜 미디어 플랫폼: TikTok, YouTube, Facebook, Instagram 등을 포함한 제3자 서비스."
+              },
+              {
+                "text": "콘텐츠: 텍스트, 이미지, 동영상, 오디오를 포함하여 서비스를 통해 업로드, 공유 또는 생성된 모든 자료."
+              }
+            ]
+          }
+        },
+        {
+          "type": "chapter",
+          "title": "범위",
+          "content": {
+            "type": "text",
+            "value": "본 개인정보 처리방침은 서비스 접근 방식(웹사이트, 모바일 애플리케이션, API 등)에 관계없이 모든 서비스 이용자에게 적용됩니다. 본 방침은 회사의 개인정보 수집, 이용 및 공유와 연결된 소셜 미디어 플랫폼과의 관계를 다룹니다."
+          }
+        }
+      ]
+    },
+    "sections": [
+      {
+        "id": "section-1",
+        "type": "section",
+        "number": "1",
+        "title": "개인정보 수집 및 이용",
+        "chapters": [
+          {
+            "id": "chapter-1",
+            "type": "chapter",
+            "number": "1",
+            "title": "수집하는 개인정보 항목",
+            "content": {
+              "type": "list",
+              "items": [
+                {
+                  "text": "회사는 회원가입, 서비스 이용, 고객상담 등을 위해 다음과 같은 개인정보를 수집하고 있습니다.",
+                  "subItems": [
+                    {
+                      "text": "1. 필수항목: 성명, 아이디(ID), 비밀번호, 이메일 주소, 생년월일"
+                    },
+                    {
+                      "text": "2. 선택항목: 닉네임(별명), 프로필 이미지, 직업, 관심분야"
+                    },
+                    {
+                      "text": "3. 서비스 이용 과정에서 자동으로 생성되어 수집되는 정보: IP 주소, 쿠키, 방문 일시, 서비스 이용 기록, 불량 이용 기록"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "id": "chapter-2",
+            "type": "chapter",
+            "number": "2",
+            "title": "개인정보 수집방법",
+            "content": {
+              "type": "list",
+              "items": [
+                {
+                  "text": "회사는 다음과 같은 방법으로 개인정보를 수집합니다.",
+                  "subItems": [
+                    {
+                      "text": "1. 홈페이지, 모바일 애플리케이션을 통한 회원가입 및 서비스 이용 과정에서 이용자 동의를 받아 수집"
+                    },
+                    {
+                      "text": "2. 데이터 수집 도구를 통한 자동 수집"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "section-2",
+        "type": "section",
+        "number": "2",
+        "title": "개인정보의 처리 목적",
+        "chapters": [
+          {
+            "id": "chapter-3",
+            "type": "chapter",
+            "number": "3",
+            "title": "수집한 개인정보의 이용",
+            "content": {
+              "type": "text",
+              "value": "회사는 수집한 개인정보를 다음의 목적을 위해 활용합니다. 이용자가 제공한 모든 정보는 아래 목적 이외의 용도로는 사용되지 않으며, 이용 목적이 변경될 경우에는 사전 동의를 구할 것입니다."
+            }
+          },
+          {
+            "id": "chapter-4",
+            "type": "chapter",
+            "number": "4",
+            "title": "이용 목적",
+            "content": {
+              "type": "list",
+              "items": [
+                {
+                  "text": "1. 회원 관리",
+                  "subItems": [
+                    {
+                      "text": "회원가입 의사 확인, 회원제 서비스 제공, 회원자격 유지 및 관리, 서비스 부정이용 방지, 각종 고지 및 통지"
+                    }
+                  ]
+                },
+                {
+                  "text": "2. 서비스 제공",
+                  "subItems": [
+                    {
+                      "text": "소셜 미디어 관리 도구 서비스 제공, 콘텐츠 제공, 맞춤 서비스 제공"
+                    }
+                  ]
+                },
+                {
+                  "text": "3. 마케팅 및 광고",
+                  "subItems": [
+                    {
+                      "text": "신규 서비스 개발 및 맞춤 서비스 제공, 이벤트 및 광고성 정보 제공 및 참여 기회 제공, 서비스의 유효성 확인, 접속 빈도 분석, 회원의 서비스 이용에 대한 통계"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "section-3",
+        "type": "section",
+        "number": "3",
+        "title": "개인정보의 제3자 제공",
+        "chapters": [
+          {
+            "id": "chapter-5",
+            "type": "chapter",
+            "number": "5",
+            "title": "개인정보 제3자 제공의 원칙",
+            "content": {
+              "type": "text",
+              "value": "회사는 이용자의 개인정보를 본 개인정보처리방침에서 명시한 범위 내에서만 처리하며, 이용자의 사전 동의 없이는 본래의 범위를 초과하여 처리하거나 제3자에게 제공하지 않습니다. 단, 다음의 경우에는 개인정보를 처리할 수 있습니다."
+            }
+          },
+          {
+            "id": "chapter-6",
+            "type": "chapter",
+            "number": "6",
+            "title": "제3자 제공이 가능한 경우",
+            "content": {
+              "type": "list",
+              "items": [
+                {
+                  "text": "1. 이용자가 사전에 제3자 제공에 동의한 경우"
+                },
+                {
+                  "text": "2. 법률에 특별한 규정이 있는 경우"
+                },
+                {
+                  "text": "3. 통계작성 및 학술연구 등의 목적을 위하여 필요한 경우로서 특정 개인을 알아볼 수 없는 형태로 개인정보를 제공하는 경우"
+                },
+                {
+                  "text": "4. 법령에서 정하는 기타 사유에 해당하는 경우"
+                }
+              ]
+            }
+          },
+          {
+            "id": "chapter-7",
+            "type": "chapter",
+            "number": "7",
+            "title": "개인정보 처리 위탁",
+            "content": {
+              "type": "list",
+              "items": [
+                {
+                  "text": "회사는 원활한 서비스 제공을 위해 다음과 같이 개인정보 처리 업무를 위탁하고 있습니다:",
+                  "subItems": [
+                    {
+                      "text": "1. 결제 서비스 제공업체: 결제 처리"
+                    },
+                    {
+                      "text": "2. 호스팅 서비스 제공업체: 서버 운영 및 관리"
+                    },
+                    {
+                      "text": "3. 고객지원 업체: 고객 문의 처리 및 서비스 안내"
+                    },
+                    {
+                      "text": "4. 소셜 미디어 플랫폼(TikTok, YouTube, Facebook, Instagram): 콘텐츠 게시, 분석 정보 조회 및 계정 관리 기능"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "section-4",
+        "type": "section",
+        "number": "4",
+        "title": "개인정보의 보유 및 파기",
+        "chapters": [
+          {
+            "id": "chapter-8",
+            "type": "chapter",
+            "number": "8",
+            "title": "개인정보의 보유 및 파기 기간",
+            "content": {
+              "type": "list",
+              "items": [
+                {
+                  "text": "회사는 개인정보를 다음과 같은 기간 동안 보유 및 이용합니다:",
+                  "subItems": [
+                    {
+                      "text": "1. 회원 정보: 회원 탈퇴 시까지(회원 탈퇴 요청 시 즉시 삭제)"
+                    },
+                    {
+                      "text": "2. 관련 법령에 따라 보존이 필요한 정보: 관련 법령이 정한 기간"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "id": "chapter-9",
+            "type": "chapter",
+            "number": "9",
+            "title": "개인정보의 파기 절차 및 방법",
+            "content": {
+              "type": "text",
+              "value": "회사는 원칙적으로 개인정보 수집 및 이용목적이 달성된 후에는 해당 정보를 지체 없이 파기합니다. 파기 절차 및 방법은 다음과 같습니다."
+            }
+          },
+          {
+            "id": "chapter-10",
+            "type": "chapter",
+            "number": "10",
+            "title": "파기 절차 및 방법",
+            "content": {
+              "type": "list",
+              "items": [
+                {
+                  "text": "1. 파기 절차: 보유기간이 만료된 개인정보는 별도의 데이터베이스(종이의 경우 별도의 문서함)로 옮겨져 내부 방침 및 기타 관련 법령에 따라 일정 기간 저장된 후 파기됩니다."
+                },
+                {
+                  "text": "2. 파기 방법: 전자적 파일 형태로 저장된 개인정보는 복구할 수 없는 기술적 방법을 사용하여 삭제합니다. 종이에 출력된 개인정보는 분쇄기로 분쇄하거나 소각합니다."
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "section-5",
+        "type": "section",
+        "number": "5",
+        "title": "정보주체의 권리 및 행사 방법",
+        "chapters": [
+          {
+            "id": "chapter-11",
+            "type": "chapter",
+            "number": "11",
+            "title": "이용자의 권리",
+            "content": {
+              "type": "text",
+              "value": "이용자는 개인정보에 대해 언제든지 다음과 같은 권리를 행사할 수 있습니다."
+            }
+          },
+          {
+            "id": "chapter-12",
+            "type": "chapter",
+            "number": "12",
+            "title": "권리의 종류 및 행사 방법",
+            "content": {
+              "type": "list",
+              "items": [
+                {
+                  "text": "1. 개인정보 열람 요구"
+                },
+                {
+                  "text": "2. 개인정보 오류 정정 요구"
+                },
+                {
+                  "text": "3. 개인정보 삭제 요구"
+                },
+                {
+                  "text": "4. 개인정보 처리정지 요구"
+                },
+                {
+                  "text": "이용자는 이러한 권리를 행사하기 위하여 개인정보 보호책임자에게 이메일(isgreen316@ingrey.me)로 연락하시면 됩니다."
+                }
+              ]
+            }
+          },
+          {
+            "id": "chapter-13",
+            "type": "chapter",
+            "number": "13",
+            "title": "개인정보 열람 요청 절차",
+            "content": {
+              "type": "list",
+              "items": [
+                {
+                  "text": "1. 이용자는 서비스의 '프로필 설정 > 개인정보' 메뉴를 통해 개인정보 열람을 요청할 수 있습니다."
+                },
+                {
+                  "text": "2. 회사는 관련 법령에 따라 요청을 신속하게 처리합니다."
+                },
+                {
+                  "text": "3. 계정 정보 삭제를 요청하려면 이용자는 'Account Deletion Request'라는 제목으로 사용자 이름과 이메일 주소를 포함하여 isgreen316@ingrey.me로 이메일을 보내야 합니다."
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "section-6",
+        "type": "section",
+        "number": "6",
+        "title": "기술적·관리적 보호조치",
+        "chapters": [
+          {
+            "id": "chapter-14",
+            "type": "chapter",
+            "number": "14",
+            "title": "기술적 조치",
+            "content": {
+              "type": "list",
+              "items": [
+                {
+                  "text": "1. 개인정보의 암호화: 이용자의 비밀번호 등 개인정보는 일방향 암호화되어 저장 및 관리됩니다."
+                },
+                {
+                  "text": "2. 해킹 등에 대비한 대책: 회사는 해킹이나 컴퓨터 바이러스 등에 의한 개인정보 유출 및 훼손을 방지하기 위하여 보안프로그램을 설치하고 있습니다."
+                },
+                {
+                  "text": "3. 접근 제한: 회사는 개인정보 취급자를 최소화하여 이용자의 개인정보 접근 권한을 제한하고 있으며, 접근 통제를 시행하고 있습니다."
+                }
+              ]
+            }
+          },
+          {
+            "id": "chapter-15",
+            "type": "chapter",
+            "number": "15",
+            "title": "관리적 조치",
+            "content": {
+              "type": "list",
+              "items": [
+                {
+                  "text": "1. 개인정보 보호에 관한 정기적인 교육: 회사는 개인정보를 취급하는 직원들에게 개인정보 보호에 관한 정기적인 교육을 실시하고 있습니다."
+                },
+                {
+                  "text": "2. 내부관리계획의 수립 및 시행: 회사는 개인정보의 안전한 처리를 위하여 내부관리계획을 수립하고 시행하고 있습니다."
+                },
+                {
+                  "text": "3. 정기적인 점검: 회사는 이용자의 개인정보 보호를 위해 정기적인 자체 감사를 실시하고 있습니다."
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "section-7",
+        "type": "section",
+        "number": "7",
+        "title": "개인정보 보호책임자 및 연락처",
+        "chapters": [
+          {
+            "id": "chapter-16",
+            "type": "chapter",
+            "number": "16",
+            "title": "개인정보 보호책임자",
+            "content": {
+              "type": "text",
+              "value": "회사는 개인정보 처리에 관한 업무를 총괄해서 책임지고, 개인정보 처리와 관련한 이용자의 불만처리 및 피해구제 등을 위하여 아래와 같이 개인정보 보호책임자를 지정하고 있습니다."
+            }
+          },
+          {
+            "id": "chapter-17",
+            "type": "chapter",
+            "number": "17",
+            "title": "개인정보 보호책임자 정보",
+            "content": {
+              "type": "list",
+              "items": [
+                {
+                  "text": "성명: [보호책임자명]"
+                },
+                {
+                  "text": "직책: 개인정보 보호책임자"
+                },
+                {
+                  "text": "이메일: isgreen316@ingrey.me"
+                }
+              ]
+            }
+          },
+          {
+            "id": "chapter-18",
+            "type": "chapter",
+            "number": "18",
+            "title": "개인정보 침해 신고 및 상담",
+            "content": {
+              "type": "text",
+              "value": "이용자는 개인정보침해로 인한 신고 및 상담이 필요하신 경우 회사 개인정보 보호책임자에게 문의하시거나, 한국인터넷진흥원(KISA) 개인정보침해신고센터 등으로 문의하실 수 있습니다."
+            }
+          }
+        ]
+      },
+      {
+        "id": "section-8",
+        "type": "section",
+        "number": "8",
+        "title": "개인정보 처리방침 변경",
+        "chapters": [
+          {
+            "id": "chapter-19",
+            "type": "chapter",
+            "number": "19",
+            "title": "처리방침의 변경 절차",
+            "content": {
+              "type": "text",
+              "value": "이 개인정보 처리방침은 법령 및 방침에 따라 변경될 수 있으며, 변경 시 회사는 변경 이유와 내용을 알기 쉽게 공지사항을 통하여 고지할 것입니다."
+            }
+          },
+          {
+            "id": "chapter-20",
+            "type": "chapter",
+            "number": "20",
+            "title": "개인정보 처리방침 시행일",
+            "content": {
+              "type": "text",
+              "value": "본 개인정보 처리방침은 2025년 2월 1일부터 적용됩니다."
+            }
+          }
+        ]
+      },
+      {
+        "id": "section-9",
+        "type": "section",
+        "number": "9",
+        "title": "소셜 미디어 플랫폼 통합",
+        "chapters": [
+          {
+            "id": "social-tiktok",
+            "type": "chapter",
+            "title": "TikTok",
+            "number": "21",
+            "content": {
+              "type": "list",
+              "items": [
+                {
+                  "text": "TikTok 계정을 당사 서비스에 연결할 때:",
+                  "subItems": [
+                    {
+                      "text": "당사는 귀하의 공개 프로필 정보, 콘텐츠 및 참여 지표에 대한 접근을 요청합니다."
+                    },
+                    {
+                      "text": "당사는 귀하의 TikTok 계정 정보, 콘텐츠(동영상, 댓글, 캡션 포함), 분석 데이터 및 팔로워 정보를 수집하고 처리할 수 있습니다."
+                    },
+                    {
+                      "text": "당사 서비스를 통한 TikTok 기능 사용은 TikTok의 서비스 약관 및 개인정보 처리방침의 적용을 받습니다."
+                    },
+                    {
+                      "text": "서비스 설정에서 TikTok 계정 연결을 해제하거나 TikTok의 보안 설정을 통해 언제든지 접근 권한을 취소할 수 있습니다."
+                    },
+                    {
+                      "text": "TikTok의 개인정보 처리방침은 다음에서 확인할 수 있습니다: ",
+                      "link": {
+                        "text": "TikTok 개인정보처리방침",
+                        "href": "https://www.tiktok.com/legal/privacy-policy-kr"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "id": "social-youtube",
+            "type": "chapter",
+            "title": "YouTube",
+            "number": "22",
+            "content": {
+              "type": "list",
+              "items": [
+                {
+                  "text": "당사 서비스는 YouTube API 서비스를 사용합니다. 당사 서비스에서 YouTube 관련 기능을 사용함으로써:",
+                  "subItems": [
+                    {
+                      "text": "당사는 귀하가 승인한 대로 YouTube 계정 정보, 채널 데이터, 동영상, 분석 및 댓글에 접근합니다."
+                    },
+                    {
+                      "text": "귀하의 정보는 당사의 개인정보 처리방침 및 Google의 개인정보 처리방침에 따라 처리됩니다."
+                    },
+                    {
+                      "text": "Google 보안 설정을 방문하여 언제든지 YouTube 계정에 대한 접근을 취소할 수 있습니다."
+                    },
+                    {
+                      "text": "YouTube는 Google의 제품이며, YouTube 데이터 처리에 관한 자세한 내용은 다음에서 확인할 수 있습니다: ",
+                      "link": {
+                        "text": "Google 개인정보처리방침",
+                        "href": "https://policies.google.com/privacy"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "id": "social-facebook",
+            "type": "chapter",
+            "title": "Facebook",
+            "number": "23",
+            "content": {
+              "type": "list",
+              "items": [
+                {
+                  "text": "Facebook 계정을 당사 서비스에 연결할 때:",
+                  "subItems": [
+                    {
+                      "text": "당사는 승인된 대로 프로필 정보, 관리하는 페이지, 게시물, 참여 지표 및 광고 데이터에 접근합니다."
+                    },
+                    {
+                      "text": "당사는 Facebook 페이지 데이터, 게시물, 분석, 사용자 정보 및 광고 성과를 수집하고 처리합니다."
+                    },
+                    {
+                      "text": "당사 서비스를 통한 Facebook 데이터 사용은 Facebook의 데이터 정책의 적용을 받습니다."
+                    },
+                    {
+                      "text": "당사 서비스 또는 Facebook의 앱 설정을 통해 언제든지 Facebook 계정 연결을 해제할 수 있습니다."
+                    },
+                    {
+                      "text": "Facebook의 개인정보 처리방침은 다음에서 확인할 수 있습니다: ",
+                      "link": {
+                        "text": "Meta 개인정보처리방침",
+                        "href": "https://www.facebook.com/privacy/policy/"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "id": "social-instagram",
+            "type": "chapter",
+            "title": "Instagram",
+            "number": "24",
+            "content": {
+              "type": "list",
+              "items": [
+                {
+                  "text": "Instagram 계정을 당사 서비스에 연결할 때:",
+                  "subItems": [
+                    {
+                      "text": "당사는 승인된 대로 Instagram 프로필 정보, 미디어(사진, 동영상), 참여 지표 및 분석 데이터에 접근합니다."
+                    },
+                    {
+                      "text": "당사는 Instagram 콘텐츠, 댓글, 분석 데이터 및 참여 정보를 수집하고 처리합니다."
+                    },
+                    {
+                      "text": "당사 서비스를 통한 Instagram 데이터 사용은 Instagram의 데이터 정책의 적용을 받습니다."
+                    },
+                    {
+                      "text": "당사 서비스 또는 Instagram의 앱 설정을 통해 언제든지 Instagram 계정 연결을 해제할 수 있습니다."
+                    },
+                    {
+                      "text": "Instagram은 Meta의 제품이며, Instagram의 개인정보 처리방침은 다음에서 확인할 수 있습니다: ",
+                      "link": {
+                        "text": "Meta 개인정보처리방침",
+                        "href": "https://www.facebook.com/privacy/policy/"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

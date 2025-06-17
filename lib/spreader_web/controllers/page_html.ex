@@ -6,5 +6,5 @@ defmodule SpreaderWeb.PageHTML do
   """
   use SpreaderWeb, :html
 
-  embed_templates "page_html/*"
+  embed_templates "../templates/page_html/*"
 end

@@ -42,6 +42,7 @@ defmodule SpreaderWeb.Router do
     scope "/", SpreaderWeb do
       pipe_through :browser
       get "/gmc/terms/:locale", TermsController, :show
+      get "/gmc/privacy/:locale", PrivacyController, :show
     end
     # If you want to use the LiveDashboard in production, you should put
     # it behind authentication and allow only admins to access it.
