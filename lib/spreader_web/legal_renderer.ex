@@ -11,8 +11,8 @@ defmodule SpreaderWeb.LegalRenderer do
 
   import Phoenix.HTML, only: [html_escape: 1, safe_to_string: 1, raw: 1]
 
-  @external_resource terms_path = Path.expand("../../terms_of_service.json", __DIR__)
-  @external_resource privacy_path = Path.expand("../../privacy_policy.json", __DIR__)
+  @external_resource terms_path = Path.expand("../../priv/legal/terms_of_service.json", __DIR__)
+  @external_resource privacy_path = Path.expand("../../priv/legal/privacy_policy.json", __DIR__)
 
   @terms_data terms_path |> File.read!() |> Jason.decode!()
   @privacy_data privacy_path |> File.read!() |> Jason.decode!()
