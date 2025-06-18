@@ -21,6 +21,10 @@ defmodule SpreaderWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+
+    # Legal pages (public)
+    get "/terms-of-service/:locale", TermsController, :show
+    get "/privacy/:locale", PrivacyController, :show
   end
 
   scope "/auth", SpreaderWeb do
