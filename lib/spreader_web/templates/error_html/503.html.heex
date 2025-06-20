@@ -1,0 +1,217 @@
+<style>
+  :root {
+    --primary-color: #ff5a36;
+    --primary-dark: #e63e2e;
+    --secondary-color: #ffac75;
+    --background-color: #fff;
+    --text-color: #333;
+    --text-light: #666;
+    --border-color: #eee;
+    --border-radius: 8px;
+    --shadow: 0 4px 12px rgba(255, 90, 54, 0.1);
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 2rem;
+    --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0px); }
+  }
+
+  .error-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: var(--spacing-lg);
+    font-family: var(--font-family);
+    animation: fadeIn 0.5s ease-out;
+  }
+
+  .error-content {
+    max-width: 600px;
+    padding: var(--spacing-lg) var(--spacing-lg) calc(var(--spacing-lg) * 1.5);
+    background-color: var(--background-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    text-align: center;
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .error-content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+  }
+
+  .error-emoji {
+    font-size: 4rem;
+    margin-bottom: var(--spacing-md);
+    animation: float 3s ease-in-out infinite;
+    display: inline-block;
+  }
+
+  .error-code {
+    color: var(--primary-color);
+    font-size: 3.5rem;
+    margin: 0;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  .error-title {
+    color: var(--text-color);
+    font-size: 1.75rem;
+    margin: var(--spacing-sm) 0 var(--spacing-md);
+    font-weight: 600;
+  }
+
+  .error-message {
+    color: var(--text-light);
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .error-actions {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    flex-wrap: wrap;
+  }
+
+  .error-button {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1.25rem;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    min-width: 140px;
+    justify-content: center;
+  }
+
+  .error-button-primary {
+    background-color: var(--primary-color);
+    color: white;
+  }
+
+  .error-button-primary:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(230, 62, 46, 0.3);
+  }
+
+  .error-button-secondary {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+  }
+
+  .error-button-secondary:hover {
+    background-color: rgba(255, 90, 54, 0.05);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(255, 90, 54, 0.1);
+  }
+
+  .error-button-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-right: 0.5rem;
+  }
+
+  .error-footer {
+    position: relative;
+    margin-top: var(--spacing-lg);
+    padding-top: var(--spacing-md);
+    font-size: 0.875rem;
+    color: var(--text-light);
+  }
+
+  .error-footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 20%;
+    right: 20%;
+    height: 1px;
+    background-color: var(--border-color);
+  }
+
+  .error-id {
+    margin: 0;
+    font-size: 0.8rem;
+  }
+
+  .error-id code {
+    background-color: rgba(255, 90, 54, 0.1);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-family: monospace;
+    color: var(--primary-color);
+  }
+
+  @media (max-width: 600px) {
+    .error-content {
+      padding: var(--spacing-md);
+    }
+    
+    .error-actions {
+      flex-direction: column;
+      gap: var(--spacing-sm);
+    }
+    
+    .error-code {
+      font-size: 3rem;
+    }
+    
+    .error-title {
+      font-size: 1.5rem;
+    }
+  }
+</style>
+<div class="error-container error-container-503">
+  <div class="error-content">
+    <div class="error-emoji" role="img" aria-label="Wrench emoji">🔧</div>
+    <h1 class="error-code">503</h1>
+    <h2 class="error-title">Server Error</h2>
+    <p class="error-message">
+      Oops! Something went wrong on our end. Our team has been notified and is working on it.
+    </p>
+    <div class="error-actions">
+      <.link navigate="/" class="error-button error-button-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" class="error-button-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+        </svg>
+        Return Home
+      </.link>
+      <.link navigate="/status" class="error-button error-button-secondary">
+        <svg xmlns="http://www.w3.org/2000/svg" class="error-button-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+        </svg>
+        System Status
+      </.link>
+    </div>
+    <div class="error-footer">
+      <p class="error-id">
+        Error ID: <code><%= System.system_time(:second) %>_<%= :crypto.strong_rand_bytes(4) |> Base.encode16() %></code>
+      </p>
+    </div>
+  </div>
+</div>

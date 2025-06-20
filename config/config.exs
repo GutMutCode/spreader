@@ -16,7 +16,7 @@ config :spreader, SpreaderWeb.Endpoint,
   url: [host: "localhost"],
   adapter: Bandit.PhoenixAdapter,
   render_errors: [
-    formats: [html: SpreaderWeb.ErrorHTML, json: SpreaderWeb.ErrorJSON],
+    formats: [html: SpreaderWeb.Error.ErrorHTML, json: SpreaderWeb.Error.ErrorJSON],
     layout: false
   ],
   pubsub_server: Spreader.PubSub,
