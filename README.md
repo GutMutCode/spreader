@@ -29,6 +29,10 @@ Be sure to add the redirect URI `http://localhost:4000/auth/google/callback` to 
 
 Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
 
+## TikTok Content Upload
+
+For prerequisites and setup to enable uploading videos to TikTok from Spreader, see [docs/tiktok_content_upload.md](docs/tiktok_content_upload.md).
+
 ## Learn more
 
   * Official website: https://www.phoenixframework.org/
