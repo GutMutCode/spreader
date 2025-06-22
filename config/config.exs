@@ -64,7 +64,14 @@ config :phoenix, :json_library, Jason
 # Ueberauth configuration
 config :ueberauth, Ueberauth,
   providers: [
-    google: {Ueberauth.Strategy.Google, [default_scope: "email profile"]}
+    google:
+      {Ueberauth.Strategy.Google,
+       [
+         default_scope: "email profile https://www.googleapis.com/auth/youtube.upload",
+         prompt: "consent",
+         access_type: "offline",
+         include_granted_scopes: true
+       ]}
   ]
 
 config :ueberauth, Ueberauth.Strategy.Google.OAuth,

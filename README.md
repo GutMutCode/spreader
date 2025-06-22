@@ -33,6 +33,14 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
 
 For prerequisites and setup to enable uploading videos to TikTok from Spreader, see [docs/tiktok_content_upload.md](docs/tiktok_content_upload.md).
 
+## Instagram Content Upload
+
+For prerequisites and setup to enable uploading content to Instagram from Spreader, see [docs/instagram_content_upload.md](docs/instagram_content_upload.md).
+
+## YouTube Content Upload
+
+For prerequisites and setup to enable uploading videos to YouTube from Spreader, see [docs/youtube_content_upload.md](docs/youtube_content_upload.md).
+
 ## Learn more
 
   * Official website: https://www.phoenixframework.org/
