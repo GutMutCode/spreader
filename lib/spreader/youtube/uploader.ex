@@ -118,10 +118,46 @@ defmodule Spreader.YouTube.Uploader do
     end
   end
 
-  defp complete_processing(_conn, body) do
-    case Jason.decode(body) do
-      {:ok, %{"id" => id}} -> {:ok, id}
-      _ -> {:ok, "unknown"}
+  # After the resumable upload finishes, YouTube will still process the video
+  # (transcoding, generating thumbnails, etc.). We poll the API until the
+  # processing status becomes "succeeded" (or we give up after a number of
+  # attempts).
+  @max_processing_attempts 10
+  @processing_interval_ms 3_000
+
+  defp complete_processing(conn, body) do
+    with {:ok, %{"id" => id}} <- Jason.decode(body),
+         :ok <- wait_until_processed(conn, id) do
+      {:ok, id}
+    else
+      {:error, _} = err -> err
+      _ -> {:error, :processing_failed}
+    end
+  end
+
+  defp wait_until_processed(_conn, _id, 0), do: {:error, :timeout}
+  defp wait_until_processed(conn, id, attempts_left \\ @max_processing_attempts) do
+    case video_processing_status(conn, id) do
+      {:ok, "succeeded"} -> :ok
+      {:ok, status} when status in ["processing", "pending"] ->
+        Process.sleep(@processing_interval_ms)
+        wait_until_processed(conn, id, attempts_left - 1)
+      {:ok, other} ->
+        Logger.error("[YouTube] unexpected processing status #{other} for #{id}")
+        {:error, :unexpected_status}
+      {:error, reason} -> {:error, reason}
+    end
+  end
+
+  defp video_processing_status(conn, id) do
+    case Videos.youtube_videos_list(conn, "processingDetails", id: id) do
+      {:ok, %GoogleApi.YouTube.V3.Model.VideoListResponse{items: [%{processingDetails: pd}]}} ->
+        {:ok, pd.processingStatus}
+      {:ok, %GoogleApi.YouTube.V3.Model.VideoListResponse{items: []}} ->
+        {:error, :not_found}
+      {:error, err} ->
+        Logger.error("[YouTube] processing status error: #{inspect(err)}")
+        {:error, err}
     end
   end
 
