@@ -33,4 +33,15 @@ defmodule Spreader.Accounts do
         {:ok, user}
     end
   end
+
+  @doc """
+  Merge `extra_tokens` into user.tokens and persist. Returns updated user.
+  """
+  @spec merge_tokens(User.t(), map()) :: {:ok, User.t()} | {:error, Ecto.Changeset.t()}
+  def merge_tokens(%User{} = user, extra_tokens) when is_map(extra_tokens) do
+    tokens = Map.merge(user.tokens || %{}, extra_tokens)
+    user
+    |> User.changeset(%{tokens: tokens})
+    |> Repo.update()
+  end
 end

@@ -56,6 +56,8 @@ defmodule Spreader.MixProject do
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
+      {:google_api_you_tube, "~> 0.53"},
+      {:hackney, "~> 1.20"},
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.5"},
       {:ueberauth, "~> 0.10"},
