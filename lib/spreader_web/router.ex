@@ -21,7 +21,11 @@ defmodule SpreaderWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
-    live "/youtube/upload", YouTubeUploadLive
+    live_session :auth_required,
+        on_mount: [SpreaderWeb.RequireAuthLive],
+        session: {__MODULE__, :session_data, []} do
+      live "/youtube/upload", YouTubeUploadLive
+    end
 
     # Legal pages (public)
     get "/terms-of-service/:locale", TermsController, :show
@@ -62,5 +66,10 @@ defmodule SpreaderWeb.Router do
       live_dashboard "/dashboard", metrics: SpreaderWeb.Telemetry
       forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
+    end
+
+  # Returns a map of session values passed to LiveView sessions
+  def session_data(conn) do
+    %{"user_id" => get_session(conn, :user_id)}
   end
 end

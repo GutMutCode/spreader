@@ -68,7 +68,7 @@ defmodule SpreaderWeb.YouTubeUploadLive do
     <div class="container mx-auto max-w-lg py-8">
       <h2 class="text-xl font-semibold mb-4">Upload Video to YouTube</h2>
 
-      <form phx-change="validate" phx-submit="save" class="space-y-4">
+      <.form for={%{}} phx-change="validate" phx-submit="save" class="space-y-4">
         <div class="mb-4">
           <.live_file_input upload={@uploads.video} />
         </div>
@@ -84,7 +84,7 @@ defmodule SpreaderWeb.YouTubeUploadLive do
         </div>
 
         <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Upload</button>
-      </form>
+      </.form>
 
       <%= if @status == :ok do %>
         <p class="mt-4 text-green-600">Upload finished. Check your YouTube Studio.</p>
