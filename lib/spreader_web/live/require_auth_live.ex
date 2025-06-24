@@ -8,18 +8,16 @@ defmodule SpreaderWeb.RequireAuthLive do
   """
 
   import Phoenix.LiveView
-import Phoenix.Component, only: [assign: 3]
 alias Spreader.Repo
 alias Spreader.Accounts.User
 
-  @impl true
   def on_mount(_name, _params, %{"user_id" => user_id} = _session, socket) do
     cond do
       socket.assigns[:current_user] ->
         {:cont, socket}
 
       user = user_id && Repo.get(User, user_id) ->
-        {:cont, assign(socket, :current_user, user)}
+        {:cont, Phoenix.Component.assign(socket, :current_user, user)}
 
       true ->
         socket

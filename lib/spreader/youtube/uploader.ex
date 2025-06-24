@@ -135,8 +135,9 @@ defmodule Spreader.YouTube.Uploader do
     end
   end
 
+  defp wait_until_processed(conn, id, attempts_left \\ @max_processing_attempts)
   defp wait_until_processed(_conn, _id, 0), do: {:error, :timeout}
-  defp wait_until_processed(conn, id, attempts_left \\ @max_processing_attempts) do
+  defp wait_until_processed(conn, id, attempts_left) do
     case video_processing_status(conn, id) do
       {:ok, "succeeded"} -> :ok
       {:ok, status} when status in ["processing", "pending"] ->
