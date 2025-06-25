@@ -20,7 +20,7 @@ defmodule SpreaderWeb.Router do
   scope "/", SpreaderWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    live "/", HomeLive
     live_session :auth_required,
         on_mount: [SpreaderWeb.RequireAuthLive],
         session: {__MODULE__, :session_data, []} do
