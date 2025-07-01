@@ -37,6 +37,9 @@ defmodule Spreader.YouTube.Uploader do
          {:ok, body} <- send_file(upload_url, opts[:filepath]),
          {:ok, video_id} <- complete_processing(conn, body) do
       {:ok, video_id}
+    else
+      {:error, reason} -> {:error, reason}
+      error -> {:error, error}
     end
   end
 
