@@ -13,8 +13,8 @@ defmodule Spreader.YouTube.Client do
   back to the DB.
   """
   alias GoogleApi.YouTube.V3.Connection
-  alias Spreader.{Repo, Accounts.User}
   require Logger
+  alias Spreader.{Repo, Accounts.User}
 
   @token_url "https://oauth2.googleapis.com/token"
 
