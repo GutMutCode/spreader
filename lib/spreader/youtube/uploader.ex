@@ -76,12 +76,19 @@ defmodule Spreader.YouTube.Uploader do
       status: %VideoStatus{privacyStatus: opts[:privacy] || "private"}
     }
 
-    case Videos.youtube_videos_insert_resumable(conn, "snippet,status", body: metadata) do
+    case Videos.youtube_videos_insert_resumable(conn, ["snippet", "status"], "resumable", [body: metadata]) do
       {:ok, %Tesla.Env{status: 200, headers: headers}} ->
         upload_url = headers |> Enum.into(%{}) |> Map.get("location")
         if upload_url, do: {:ok, upload_url}, else: {:error, :no_location_header}
 
-      {:error, err} -> {:error, err}
+      {:ok, %Tesla.Env{status: status}} -> 
+        {:error, {:unexpected_status, status}}
+
+      {:error, err} -> 
+        {:error, err}
+        
+      _ -> 
+        {:error, :unknown_response}
     end
   end
 
