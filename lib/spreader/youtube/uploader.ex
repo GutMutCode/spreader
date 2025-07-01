@@ -18,11 +18,11 @@ defmodule Spreader.YouTube.Uploader do
   Processing status is polled until it reaches `succeeded`.
   """
 
-  alias Spreader.YouTube.Client
-  alias Spreader.Accounts
   alias GoogleApi.YouTube.V3.Api.Videos
   alias GoogleApi.YouTube.V3.Model.{Video, VideoSnippet, VideoStatus}
   require Logger
+  alias Spreader.Accounts
+  alias Spreader.YouTube.Client
 
   @chunk 8 * 1024 * 1024
 
