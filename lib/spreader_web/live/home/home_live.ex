@@ -10,6 +10,7 @@ defmodule SpreaderWeb.HomeLive do
       socket
       |> assign(:user_count, user_count)
       |> assign(:page_title, "Spreader - Multi-Platform Upload Solution")
+      |> assign(:mobile_menu_active, false)
 
     # 매 30초마다 사용자 수 업데이트
     if connected?(socket) do
@@ -52,6 +53,11 @@ defmodule SpreaderWeb.HomeLive do
   @impl true
   def handle_event("tour_dashboard", _, socket) do
     {:noreply, push_navigate(socket, to: ~p"/users/register?tour=true")}
+  end
+
+  @impl true
+  def handle_event("toggle_mobile_menu", _, socket) do
+    {:noreply, assign(socket, :mobile_menu_active, !socket.assigns.mobile_menu_active)}
   end
 
   defp get_user_count do
