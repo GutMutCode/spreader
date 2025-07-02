@@ -8,8 +8,8 @@ defmodule SpreaderWeb.RequireAuthLive do
   """
 
   import Phoenix.LiveView
-alias Spreader.Repo
 alias Spreader.Accounts.User
+alias Spreader.Repo
 
   def on_mount(_name, _params, %{"user_id" => user_id} = _session, socket) do
     cond do

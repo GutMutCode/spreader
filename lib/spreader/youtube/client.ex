@@ -12,10 +12,9 @@ defmodule Spreader.YouTube.Client do
   refresh it using Google's OAuth 2 token endpoint and persist the new tokens
   back to the DB.
   """
-
-  alias Spreader.{Repo, Accounts.User}
-  require Logger
   alias GoogleApi.YouTube.V3.Connection
+  require Logger
+  alias Spreader.{Accounts.User, Repo}
 
   @token_url "https://oauth2.googleapis.com/token"
 

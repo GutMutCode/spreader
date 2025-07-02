@@ -1,0 +1,220 @@
+<div class="home-container">
+  <!-- Navigation Bar -->
+  <nav class="main-nav">
+    <div class="nav-container">
+      <div class="logo-container">
+        <a href="/" class="logo-link">
+          <img src="/images/logo.png" alt="CreatorSync Logo" class="h-10 w-auto emerald-500 dark:indigo-400" loading="lazy" />
+          <span class="logo-text ml-3">Spreader</span>
+        </a>
+      </div>
+      <div class="nav-links">
+        <a href="#features-section" class="nav-link" phx-click="scroll_to_features">Features</a>
+        <a href="#pricing-section" class="nav-link" phx-click="scroll_to_pricing">Pricing</a>
+        <a href="#faq-section" class="nav-link" phx-click="scroll_to_faq">FAQ</a>
+      </div>
+      <div class="nav-buttons">
+        <button phx-click="login" class="nav-button login">Login</button>
+        <button phx-click="signup" class="nav-button signup">Start Free</button>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Header Section -->
+  <header class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">Upload to <br /> <span class="highlight">multiple platforms</span> simultaneously with one upload</h1>
+      <p class="hero-subtitle">Multi-platform upload solution for content creators</p>
+      <div class="user-counter">
+        <div class="counter-icon">👥</div>
+        <div class="counter-text">
+          <span class="counter-number"><%= @user_count %>+</span>
+          <span class="counter-label">creators using it</span>
+        </div>
+      </div>
+      <div class="cta-buttons">
+        <button phx-click="signup" class="btn-primary">Start 7-day free trial</button>
+        <button phx-click="tour_dashboard" class="btn-secondary">Explore Dashboard</button>
+      </div>
+    </div>
+    <div class="hero-image">
+      <div class="dashboard-preview">
+        <div class="dashboard-screen">
+          <div class="dashboard-header">
+            <div class="steps">
+              <div class="step active">1. Choose Platforms</div>
+              <div class="step">2. Select Files</div>
+              <div class="step">3. Add Details</div>
+            </div>
+          </div>
+          <div class="platform-selection">
+            <div class="platform tiktok selected">
+              <div class="platform-name">TikTok</div>
+              <div class="platform-logo"><img src={~p"/images/tiktok_logo.svg"} alt="TikTok logo" class="platform-logo-img" /></div>
+              <div class="platform-check">✓</div>
+            </div>
+            <div class="platform youtube selected">
+              <div class="platform-name">YouTube</div>
+              <div class="platform-logo"><img src={~p"/images/youtube.svg"} alt="YouTube logo" class="platform-logo-img" /></div>
+              <div class="platform-check">✓</div>
+            </div>
+          <div class="platform instagram selected">
+              <div class="platform-name">Instagram</div>
+              <div class="platform-logo"><img src={~p"/images/instagram_logo.svg"} alt="Instagram logo" class="platform-logo-img" /></div>
+              <div class="platform-check">✓</div>
+            </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Features Section -->
+  <section id="features-section" class="features-section">
+    <h2 class="section-title">Upload to All Platforms in One Place</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🔄</div>
+        <h3 class="feature-title">Simultaneous Upload</h3>
+        <p class="feature-description">Upload content to TikTok and YouTube simultaneously with just one upload</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⏱️</div>
+        <p class="feature-title">Time Saving</p>
+        <p class="feature-description">Save 90% of the time spent manually uploading to multiple platforms</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <p class="feature-title">Unified Analytics</p>
+        <p class="feature-description">Check the performance of all platforms at a glance</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dashboard Section -->
+  <section class="dashboard-section">
+    <div class="dashboard-info">
+      <h2 class="section-title">Simple 3-Step Upload Process</h2>
+      <div class="workflow-steps">
+        <div class="workflow-step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3 class="step-title">Choose Platforms</h3>
+            <p class="step-description">Select TikTok, YouTube, or both for multi-platform uploading</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3 class="step-title">Upload Files</h3>
+            <p class="step-description">Content files are automatically optimized for each platform when uploaded</p>
+          </div>
+        </div>
+        <div class="workflow-step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3 class="step-title">Add Details</h3>
+            <p class="step-description">Set titles, descriptions, tags once and apply to all platforms</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section id="pricing-section" class="pricing-section">
+    <h2 class="section-title">Reasonable Pricing</h2>
+    <div class="pricing-cards-container">
+      <div class="pricing-card">
+      <div class="pricing-header">
+        <h3 class="pricing-title">Basic Plan</h3>
+        <div class="pricing-price">
+          <span class="price-amount">$4</span>
+          <span class="price-period">/ month</span>
+        </div>
+      </div>
+      <div class="pricing-features">
+        <div class="pricing-feature">✅ 1 account (TikTok, YouTube, and Instagram)</div>
+        <div class="pricing-feature">✅ Simultaneous uploads to all platforms</div>
+      </div>
+      <div class="pricing-cta">
+        <div class="free-trial-badge">7-day free trial</div>
+        <button phx-click="signup" class="btn-primary full-width">Start Now</button>
+      </div>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-header">
+        <h3 class="pricing-title">Standard Plan</h3>
+        <div class="pricing-price">
+          <span class="price-amount">$7</span>
+          <span class="price-period">/ month</span>
+        </div>
+      </div>
+      <div class="pricing-features">
+        <div class="pricing-feature">✅ 2 accounts (TikTok, YouTube, and Instagram)</div>
+        <div class="pricing-feature">✅ Simultaneous uploads to all platforms</div>
+      </div>
+      <div class="pricing-cta">
+        <div class="free-trial-badge">7-day free trial</div>
+        <button phx-click="signup" class="btn-primary full-width">Start Now</button>
+      </div>
+    </div>
+    <div class="pricing-card premium">
+      <div class="pricing-header">
+        <h3 class="pricing-title">Premium Plan</h3>
+        <div class="pricing-price">
+          <span class="price-amount">$30</span>
+          <span class="price-period">/ month</span>
+        </div>
+      </div>
+      <div class="pricing-features">
+        <div class="pricing-feature">✅ Unlimited accounts</div>
+        <div class="pricing-feature">✅ Simultaneous uploads to all platforms</div>
+      </div>
+      <div class="pricing-cta">
+        <div class="free-trial-badge">7-day free trial</div>
+        <button phx-click="signup" class="btn-primary full-width">Start Now</button>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq-section" class="faq-section">
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <h3 class="faq-question">How long is the free trial period?</h3>
+        <p class="faq-answer">You can use all features for free for 7 days after signing up. After that, a subscription fee of $2 per month will apply.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-question">Do you support platforms other than TikTok and YouTube?</h3>
+        <p class="faq-answer">Currently, we primarily support TikTok and YouTube, and we plan to add more platforms in the future.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-question">How do I cancel my subscription?</h3>
+        <p class="faq-answer">You can cancel your subscription at any time in the account settings of your dashboard. You can continue using the service until the end of your billing cycle even after cancellation.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="final-cta">
+    <h2 class="cta-title">Start Right Now</h2>
+    <p class="cta-description">Make your time as a content creator more valuable</p>
+    <div class="cta-buttons">
+      <button phx-click="signup" class="btn-primary">Start 7-day free trial</button>
+      <button phx-click="login" class="btn-secondary">Login</button>
+    </div>
+  </section>
+</div>
+
+<script>
+  // Client-side script handling
+  document.addEventListener("phx:scroll-to", (e) => {
+    const element = document.getElementById(e.detail.id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  });
+</script>
