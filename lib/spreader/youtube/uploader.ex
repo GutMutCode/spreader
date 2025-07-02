@@ -67,7 +67,14 @@ defmodule Spreader.YouTube.Uploader do
   end
 
   defp init_resumable(conn, opts) do
-    metadata = %Video{
+    metadata = build_video_metadata(opts)
+    conn
+    |> Videos.youtube_videos_insert_resumable(["snippet", "status"], "resumable", [body: metadata])
+    |> handle_resumable_response()
+  end
+
+  defp build_video_metadata(opts) do
+    %Video{
       snippet: %VideoSnippet{
         title: opts[:title] || Path.basename(opts[:filepath]),
         description: opts[:description] || "",
@@ -75,21 +82,23 @@ defmodule Spreader.YouTube.Uploader do
       },
       status: %VideoStatus{privacyStatus: opts[:privacy] || "private"}
     }
+  end
 
-    case Videos.youtube_videos_insert_resumable(conn, ["snippet", "status"], "resumable", [body: metadata]) do
-      {:ok, %Tesla.Env{status: 200, headers: headers}} ->
-        upload_url = headers |> Enum.into(%{}) |> Map.get("location")
-        if upload_url, do: {:ok, upload_url}, else: {:error, :no_location_header}
+  defp handle_resumable_response({:ok, %Tesla.Env{status: 200, headers: headers}}) do
+    upload_url = headers |> Enum.into(%{}) |> Map.get("location")
+    if upload_url, do: {:ok, upload_url}, else: {:error, :no_location_header}
+  end
 
-      {:ok, %Tesla.Env{status: status}} ->
-        {:error, {:unexpected_status, status}}
+  defp handle_resumable_response({:ok, %Tesla.Env{status: status}}) do
+    {:error, {:unexpected_status, status}}
+  end
 
-      {:error, err} ->
-        {:error, err}
+  defp handle_resumable_response({:error, err}) do
+    {:error, err}
+  end
 
-      _->
-        {:error, :unknown_response}
-    end
+  defp handle_resumable_response(_) do
+    {:error, :unknown_response}
   end
 
   defp send_file(_upload_url, nil), do: {:error, :no_filepath_provided}
