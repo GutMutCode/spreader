@@ -8,14 +8,21 @@
           <span class="logo-text ml-3">Spreader</span>
         </a>
       </div>
-      <div class="nav-links">
-        <a href="#features-section" class="nav-link" phx-click="scroll_to_features">Features</a>
-        <a href="#pricing-section" class="nav-link" phx-click="scroll_to_pricing">Pricing</a>
-        <a href="#faq-section" class="nav-link" phx-click="scroll_to_faq">FAQ</a>
-      </div>
-      <div class="nav-buttons">
-        <button phx-click="login" class="nav-button login">Login</button>
-        <button phx-click="signup" class="nav-button signup">Start Free</button>
+      <button class="mobile-menu-toggle" phx-click="toggle_mobile_menu" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class={"nav-menu #{if @mobile_menu_active, do: "active"}"}>
+        <div class="nav-links">
+          <a href="#features-section" class="nav-link" phx-click="scroll_to_features">Features</a>
+          <a href="#pricing-section" class="nav-link" phx-click="scroll_to_pricing">Pricing</a>
+          <a href="#faq-section" class="nav-link" phx-click="scroll_to_faq">FAQ</a>
+        </div>
+        <div class="nav-buttons">
+          <button phx-click="login" class="nav-button login">Login</button>
+          <button phx-click="signup" class="nav-button signup">Start Free</button>
+        </div>
       </div>
     </div>
   </nav>
