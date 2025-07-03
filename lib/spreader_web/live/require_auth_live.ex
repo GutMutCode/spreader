@@ -27,7 +27,5 @@ alias Spreader.Repo
     end
   end
 
-  # Helper for readability
-  defp halt({:noreply, socket}), do: {:halt, socket}
   defp halt(socket), do: {:halt, socket}
 end

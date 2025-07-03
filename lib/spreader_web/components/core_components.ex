@@ -16,8 +16,8 @@ defmodule SpreaderWeb.CoreComponents do
   """
   use Phoenix.Component
 
-  alias Phoenix.LiveView.JS
   alias Phoenix.HTML.Form
+  alias Phoenix.LiveView.JS
   use Gettext, backend: SpreaderWeb.Gettext
 
   @doc """

@@ -32,15 +32,15 @@ defmodule Spreader.YouTube.Uploader do
   """
   @spec upload(Accounts.User.t(), keyword()) :: {:ok, String.t()} | {:error, term()}
   def upload(user, opts) when is_list(opts) do
-    with {:ok, conn} <- Client.connection(user),
-         {:ok, %{channel_id: _channel_id, user: _user}} <- ensure_channel_id(user, conn),
-         {:ok, upload_url} <- init_resumable(conn, opts),
-         {:ok, body} <- send_file(upload_url, opts[:filepath]),
-         {:ok, video_id} <- complete_processing(conn, body) do
-      {:ok, video_id}
-    else
-      {:error, reason} -> {:error, reason}
-      error -> {:error, error}
+    case opts[:filepath] do
+      nil -> {:error, :no_filepath_provided}
+      filepath ->
+        with {:ok, conn} <- Client.connection(user),
+             {:ok, %{channel_id: _channel_id, user: _user}} <- ensure_channel_id(user, conn),
+             {:ok, upload_url} <- init_resumable(conn, opts),
+             {:ok, body} <- send_file(upload_url, filepath) do
+          complete_processing(conn, body)
+        end
     end
   end
 
@@ -55,7 +55,7 @@ defmodule Spreader.YouTube.Uploader do
       nil ->
         # Fetch channel id via API and persist
         with {:ok, %GoogleApi.YouTube.V3.Model.ChannelListResponse{items: [item | _]}} <-
-               Channels.youtube_channels_list(conn, "id", mine: true),
+               Channels.youtube_channels_list(conn, ["id"], mine: true),
              %{id: cid} <- Map.from_struct(item),
              {:ok, user} <- Accounts.merge_tokens(user, %{"youtube_channel_id" => cid}) do
           {:ok, %{channel_id: cid, user: user}}
@@ -100,15 +100,13 @@ defmodule Spreader.YouTube.Uploader do
     {:error, err}
   end
 
-  defp handle_resumable_response(_) do
-    {:error, :unknown_response}
-  end
+  
 
   defp send_file(_upload_url, nil), do: {:error, :no_filepath_provided}
 
   defp send_file(upload_url, filepath) do
     Logger.info("[YouTube] Uploading file #{filepath} to #{upload_url}")
-    file = File.stream!(filepath, [], @chunk)
+    file = File.stream!(filepath, @chunk, [])
 
     Enum.reduce_while(Stream.with_index(file), {0, :ok}, fn {chunk, _idx}, {offset, _} ->
       chunk_size = byte_size(chunk)
@@ -160,14 +158,12 @@ defmodule Spreader.YouTube.Uploader do
       {:ok, id}
     else
       {:error, _} = err -> err
-      _ -> {:error, :processing_failed}
     end
   end
 
-  defp wait_until_processed(conn, id, attempts_left \\ @max_processing_attempts)
+  defp wait_until_processed(conn, id), do: wait_until_processed(conn, id, @max_processing_attempts)
   defp wait_until_processed(_conn, _id, 0), do: {:error, :timeout}
-
-  defp wait_until_processed(conn, id, attempts_left) do
+  defp wait_until_processed(conn, id, attempts_left) when attempts_left > 0 do
     case video_processing_status(conn, id) do
       {:ok, "succeeded"} ->
         :ok
@@ -186,7 +182,7 @@ defmodule Spreader.YouTube.Uploader do
   end
 
   defp video_processing_status(conn, id) do
-    case Videos.youtube_videos_list(conn, "processingDetails", id: id) do
+    case Videos.youtube_videos_list(conn, ["processingDetails"], id: id) do
       {:ok, %GoogleApi.YouTube.V3.Model.VideoListResponse{items: [%{processingDetails: pd}]}} ->
         {:ok, pd.processingStatus}
 
