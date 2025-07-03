@@ -100,8 +100,6 @@ defmodule Spreader.YouTube.Uploader do
     {:error, err}
   end
 
-  
-
   defp send_file(_upload_url, nil), do: {:error, :no_filepath_provided}
 
   defp send_file(upload_url, filepath) do
