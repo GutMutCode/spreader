@@ -1,4 +1,5 @@
 defmodule Spreader.DataCase do
+  alias Ecto.Adapters.SQL.Sandbox
   @moduledoc """
   This module defines the setup for tests requiring
   access to the application's data layer.
@@ -36,8 +37,8 @@ defmodule Spreader.DataCase do
   Sets up the sandbox based on the test tags.
   """
   def setup_sandbox(tags) do
-    pid = Ecto.Adapters.SQL.Sandbox.start_owner!(Spreader.Repo, shared: not tags[:async])
-    on_exit(fn -> Ecto.Adapters.SQL.Sandbox.stop_owner(pid) end)
+    pid = Sandbox.start_owner!(Spreader.Repo, shared: not tags[:async])
+    on_exit(fn -> Sandbox.stop_owner(pid) end)
   end
 
   @doc """

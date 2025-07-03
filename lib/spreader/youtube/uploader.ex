@@ -18,10 +18,11 @@ defmodule Spreader.YouTube.Uploader do
   Processing status is polled until it reaches `succeeded`.
   """
 
-  alias Spreader.YouTube.Client
-  alias Spreader.Accounts
+  alias GoogleApi.YouTube.V3.Api.Channels
   alias GoogleApi.YouTube.V3.Api.Videos
   alias GoogleApi.YouTube.V3.Model.{Video, VideoSnippet, VideoStatus}
+  alias Spreader.Accounts
+  alias Spreader.YouTube.Client
   require Logger
 
   @chunk 8 * 1024 * 1024
@@ -34,9 +35,8 @@ defmodule Spreader.YouTube.Uploader do
     with {:ok, conn} <- Client.connection(user),
          {:ok, %{channel_id: _channel_id, user: _user}} <- ensure_channel_id(user, conn),
          {:ok, upload_url} <- init_resumable(conn, opts),
-         {:ok, body} <- send_file(upload_url, opts[:filepath]),
-         {:ok, video_id} <- complete_processing(conn, body) do
-      {:ok, video_id}
+         {:ok, body} <- send_file(upload_url, opts[:filepath]) do
+      complete_processing(conn, body)
     end
   end
 
@@ -51,7 +51,7 @@ defmodule Spreader.YouTube.Uploader do
       nil ->
         # Fetch channel id via API and persist
         with {:ok, %GoogleApi.YouTube.V3.Model.ChannelListResponse{items: [item | _]}} <-
-               GoogleApi.YouTube.V3.Api.Channels.youtube_channels_list(conn, "id", mine: true),
+               Channels.youtube_channels_list(conn, "id", mine: true),
              %{id: cid} <- Map.from_struct(item),
              {:ok, user} <- Accounts.merge_tokens(user, %{"youtube_channel_id" => cid}) do
           {:ok, %{channel_id: cid, user: user}}

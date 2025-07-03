@@ -13,7 +13,7 @@ defmodule Spreader.YouTube.Client do
   back to the DB.
   """
 
-  alias Spreader.{Repo, Accounts.User}
+  alias Spreader.{Accounts.User, Repo}
   require Logger
   alias GoogleApi.YouTube.V3.Connection
 
