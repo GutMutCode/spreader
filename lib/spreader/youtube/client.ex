@@ -37,9 +37,9 @@ defmodule Spreader.YouTube.Client do
     tokens = user.tokens || %{}
 
     # Prefer namespaced keys; fall back to generic OAuth keys saved by AuthController
-    access  = Map.get(tokens, "youtube_access_token", Map.get(tokens, "access_token"))
+    access = Map.get(tokens, "youtube_access_token", Map.get(tokens, "access_token"))
     refresh = Map.get(tokens, "youtube_refresh_token", Map.get(tokens, "refresh_token"))
-    exp     = Map.get(tokens, "youtube_token_expires_at", Map.get(tokens, "expires_at", 0))
+    exp = Map.get(tokens, "youtube_token_expires_at", Map.get(tokens, "expires_at", 0))
 
     cond do
       is_nil(access) or is_nil(refresh) ->
@@ -54,25 +54,30 @@ defmodule Spreader.YouTube.Client do
   end
 
   defp refresh_token(%User{} = user, refresh_token) do
-    client_id     = System.fetch_env!("YT_CLIENT_ID")
+    client_id = System.fetch_env!("YT_CLIENT_ID")
     client_secret = System.fetch_env!("YT_CLIENT_SECRET")
 
-    body = URI.encode_query(%{
-      client_id: client_id,
-      client_secret: client_secret,
-      refresh_token: refresh_token,
-      grant_type: "refresh_token"
-    })
+    body =
+      URI.encode_query(%{
+        client_id: client_id,
+        client_secret: client_secret,
+        refresh_token: refresh_token,
+        grant_type: "refresh_token"
+      })
 
     headers = [{"content-type", "application/x-www-form-urlencoded"}]
 
     case :hackney.request(:post, @token_url, headers, body, []) do
       {:ok, 200, _hdrs, client_ref} ->
         {:ok, resp_body} = :hackney.body(client_ref)
+
         case Jason.decode(resp_body) do
           {:ok, %{"access_token" => new_access, "expires_in" => expires}} ->
-            tokens = user.tokens |> Map.put("youtube_access_token", new_access)
-                                   |> Map.put("youtube_token_expires_at", now() + expires)
+            tokens =
+              user.tokens
+              |> Map.put("youtube_access_token", new_access)
+              |> Map.put("youtube_token_expires_at", now() + expires)
+
             # Persist silently; ignore result – token can still be used even if DB fails
             _ = user |> Ecto.Changeset.change(tokens: tokens) |> Repo.update()
             {:ok, new_access}

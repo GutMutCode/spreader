@@ -35,8 +35,12 @@ defmodule Spreader.YouTube.Uploader do
     with {:ok, conn} <- Client.connection(user),
          {:ok, %{channel_id: _channel_id, user: _user}} <- ensure_channel_id(user, conn),
          {:ok, upload_url} <- init_resumable(conn, opts),
-         {:ok, body} <- send_file(upload_url, opts[:filepath]) do
-      complete_processing(conn, body)
+         {:ok, body} <- send_file(upload_url, opts[:filepath]),
+         {:ok, video_id} <- complete_processing(conn, body) do
+      {:ok, video_id}
+    else
+      {:error, reason} -> {:error, reason}
+      error -> {:error, error}
     end
   end
 
@@ -59,12 +63,21 @@ defmodule Spreader.YouTube.Uploader do
           _ -> {:error, :channel_id_fetch_failed}
         end
 
-      cid -> {:ok, %{channel_id: cid, user: user}}
+      cid ->
+        {:ok, %{channel_id: cid, user: user}}
     end
   end
 
   defp init_resumable(conn, opts) do
-    metadata = %Video{
+    metadata = build_video_metadata(opts)
+
+    conn
+    |> Videos.youtube_videos_insert_resumable(["snippet", "status"], "resumable", body: metadata)
+    |> handle_resumable_response()
+  end
+
+  defp build_video_metadata(opts) do
+    %Video{
       snippet: %VideoSnippet{
         title: opts[:title] || Path.basename(opts[:filepath]),
         description: opts[:description] || "",
@@ -72,17 +85,27 @@ defmodule Spreader.YouTube.Uploader do
       },
       status: %VideoStatus{privacyStatus: opts[:privacy] || "private"}
     }
+  end
 
-    case Videos.youtube_videos_insert_resumable(conn, "snippet,status", body: metadata) do
-      {:ok, %Tesla.Env{status: 200, headers: headers}} ->
-        upload_url = headers |> Enum.into(%{}) |> Map.get("location")
-        if upload_url, do: {:ok, upload_url}, else: {:error, :no_location_header}
+  defp handle_resumable_response({:ok, %Tesla.Env{status: 200, headers: headers}}) do
+    upload_url = headers |> Enum.into(%{}) |> Map.get("location")
+    if upload_url, do: {:ok, upload_url}, else: {:error, :no_location_header}
+  end
 
-      {:error, err} -> {:error, err}
-    end
+  defp handle_resumable_response({:ok, %Tesla.Env{status: status}}) do
+    {:error, {:unexpected_status, status}}
+  end
+
+  defp handle_resumable_response({:error, err}) do
+    {:error, err}
+  end
+
+  defp handle_resumable_response(_) do
+    {:error, :unknown_response}
   end
 
   defp send_file(_upload_url, nil), do: {:error, :no_filepath_provided}
+
   defp send_file(upload_url, filepath) do
     Logger.info("[YouTube] Uploading file #{filepath} to #{upload_url}")
     file = File.stream!(filepath, [], @chunk)
@@ -90,6 +113,7 @@ defmodule Spreader.YouTube.Uploader do
     Enum.reduce_while(Stream.with_index(file), {0, :ok}, fn {chunk, _idx}, {offset, _} ->
       chunk_size = byte_size(chunk)
       range = "bytes #{offset}-#{offset + chunk_size - 1}/*"
+
       headers = [
         {"Content-Length", Integer.to_string(chunk_size)},
         {"Content-Range", range}
@@ -97,15 +121,20 @@ defmodule Spreader.YouTube.Uploader do
 
       case :hackney.request(:put, upload_url, headers, chunk, []) do
         {:ok, 308, hdrs, _} ->
-          range_end = hdrs |> Enum.into(%{}) |> Map.get("range") |> parse_range_end(offset + chunk_size - 1)
+          range_end =
+            hdrs |> Enum.into(%{}) |> Map.get("range") |> parse_range_end(offset + chunk_size - 1)
+
           {:cont, {range_end + 1, :ok}}
+
         {:ok, 201, _hdrs, client_ref} ->
           {:ok, body} = :hackney.body(client_ref)
           {:halt, {:done, body}}
+
         {:ok, status, _hdrs, client_ref} ->
           {:ok, body} = :hackney.body(client_ref)
           Logger.error("[YouTube] upload failed #{status}: #{body}")
           {:halt, {:error, status}}
+
         err ->
           Logger.error("[YouTube] upload chunk error: #{inspect(err)}")
           {:halt, {:error, err}}
@@ -137,16 +166,22 @@ defmodule Spreader.YouTube.Uploader do
 
   defp wait_until_processed(conn, id, attempts_left \\ @max_processing_attempts)
   defp wait_until_processed(_conn, _id, 0), do: {:error, :timeout}
+
   defp wait_until_processed(conn, id, attempts_left) do
     case video_processing_status(conn, id) do
-      {:ok, "succeeded"} -> :ok
+      {:ok, "succeeded"} ->
+        :ok
+
       {:ok, status} when status in ["processing", "pending"] ->
         Process.sleep(@processing_interval_ms)
         wait_until_processed(conn, id, attempts_left - 1)
+
       {:ok, other} ->
         Logger.error("[YouTube] unexpected processing status #{other} for #{id}")
         {:error, :unexpected_status}
-      {:error, reason} -> {:error, reason}
+
+      {:error, reason} ->
+        {:error, reason}
     end
   end
 
@@ -154,8 +189,10 @@ defmodule Spreader.YouTube.Uploader do
     case Videos.youtube_videos_list(conn, "processingDetails", id: id) do
       {:ok, %GoogleApi.YouTube.V3.Model.VideoListResponse{items: [%{processingDetails: pd}]}} ->
         {:ok, pd.processingStatus}
+
       {:ok, %GoogleApi.YouTube.V3.Model.VideoListResponse{items: []}} ->
         {:error, :not_found}
+
       {:error, err} ->
         Logger.error("[YouTube] processing status error: #{inspect(err)}")
         {:error, err}
@@ -164,6 +201,7 @@ defmodule Spreader.YouTube.Uploader do
 
   # Parse end index from "Range" header (e.g., "bytes=0-524287")
   defp parse_range_end(nil, default), do: default
+
   defp parse_range_end("bytes=" <> range, _default) do
     [_start, ending] = String.split(range, "-")
     ending |> String.trim() |> String.to_integer()

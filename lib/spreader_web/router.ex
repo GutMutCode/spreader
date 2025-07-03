@@ -13,14 +13,30 @@ defmodule SpreaderWeb.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :browser_no_layout do
+    plug :accepts, ["html"]
+    plug :fetch_session
+    plug :fetch_live_flash
+    plug SpreaderWeb.AuthPlug
+    plug Ueberauth
+    plug SpreaderWeb.LocalePlug
+    plug :protect_from_forgery
+    plug :put_secure_browser_headers
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
 
   scope "/", SpreaderWeb do
+    pipe_through :browser_no_layout
+
+    live "/", HomeLive
+  end
+
+  scope "/", SpreaderWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
     live_session :auth_required,
         on_mount: [SpreaderWeb.RequireAuthLive],
         session: {__MODULE__, :session_data, []} do
